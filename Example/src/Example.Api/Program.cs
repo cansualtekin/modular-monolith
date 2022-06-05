@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using Serilog;
+using Example.Platform.Middlewares;
 
 namespace Example.Api
 {
@@ -57,6 +58,10 @@ namespace Example.Api
                     options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                 }
             });
+
+            // Middlewares
+            app.UseMiddleware<ApiResponseMiddleware>();
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             // Configure the HTTP request pipeline.
 
