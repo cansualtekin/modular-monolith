@@ -39,12 +39,6 @@ namespace Example.Platform.Middlewares
                 {
                     objResult = JsonConvert.DeserializeObject(jsonBody);
                 }
-                else
-                {
-                    objResult = jsonBody;
-
-                    _logger.Warning($"Invalid JSON response from {context.Request.Path}");
-                }
 
                 string? errorMessage = null;
 
@@ -59,6 +53,9 @@ namespace Example.Platform.Middlewares
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 });
+
+                context.Response.StatusCode = 200;
+                context.Response.ContentType = "application/json";  
 
                 await context.Response.WriteAsync(response);
             }
