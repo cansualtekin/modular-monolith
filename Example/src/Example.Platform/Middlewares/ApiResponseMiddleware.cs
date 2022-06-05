@@ -11,7 +11,6 @@ namespace Example.Platform.Middlewares
     public class ApiResponseMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger _logger = Log.ForContext<ExceptionHandlerMiddleware>();
 
         public ApiResponseMiddleware(RequestDelegate next)
         {
