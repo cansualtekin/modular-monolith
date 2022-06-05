@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
+using Serilog;
 
 namespace Example.Api
 {
@@ -36,6 +37,12 @@ namespace Example.Api
             });
 
             builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetExecutingAssembly());
+
+            // SeriLog
+            builder.Host.UseSerilog((context, config) => {
+                config.ReadFrom.Configuration(context.Configuration)
+                .Enrich.FromLogContext();
+            });
 
             var app = builder.Build();
 
