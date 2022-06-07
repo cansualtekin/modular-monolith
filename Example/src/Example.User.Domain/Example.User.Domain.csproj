@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Example.Platform\Example.Platform.csproj" />
+    <ProjectReference Include="..\Example.SharedKernel\Example.SharedKernel.csproj" />
+  </ItemGroup>
+
 </Project>
