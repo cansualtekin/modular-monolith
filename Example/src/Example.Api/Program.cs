@@ -4,6 +4,7 @@ using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using Serilog;
 using Example.Platform.Middlewares;
+using Example.Platform.Extensions;
 
 namespace Example.Api
 {
@@ -16,6 +17,9 @@ namespace Example.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            // Modules 
+            builder.Services.AddModule<User.Application.Module>();
 
             // Versioning
             builder.Services.AddApiVersioning(options =>
