@@ -3,7 +3,7 @@
 namespace Example.Platform.Persistence
 {
     public class EntityBase<TKey>
-        where TKey : struct
+        where TKey : struct, IEquatable<TKey>
     {
         [Key]
         public TKey Id { get; set; }
