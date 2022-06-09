@@ -19,7 +19,7 @@ namespace Example.Api
             builder.Services.AddControllers();
 
             // Modules 
-            builder.Services.AddModule<User.Application.Module>();
+            builder.AddModule<User.Application.Module>();
 
             // Versioning
             builder.Services.AddApiVersioning(options =>

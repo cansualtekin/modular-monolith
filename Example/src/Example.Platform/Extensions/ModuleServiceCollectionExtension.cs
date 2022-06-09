@@ -1,25 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
 
 namespace Example.Platform.Extensions
 {
     public static class ModuleServiceCollectionExtension
     {
-        public static IServiceCollection AddModule<TModule>(this IServiceCollection services)
+        public static void AddModule<TModule>(this WebApplicationBuilder builder)
             where TModule : class, IModule
         {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.SetupInformation.ApplicationBase)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
-                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
-                .AddEnvironmentVariables()
-                .Build();
-
             var module = Activator.CreateInstance<TModule>();
 
-            module.ConfigureServices(services, configuration);
-
-            return services;
+            module.ConfigureServices(builder.Services, builder.Configuration);
         }
     }
 }
